@@ -12,3 +12,5 @@ const eventSchema = new Schema({
 }, {
     timestamps: true
 });
+
+
