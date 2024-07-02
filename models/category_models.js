@@ -6,3 +6,6 @@ const categorySchema = new Schema({
     description: {type: String, required: true},
     image: {type: String, required: true, unique: true}
 })
+
+
+export const CategoryModel = model('Category', categorySchema)
