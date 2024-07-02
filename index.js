@@ -1,8 +1,8 @@
 import express from "express";
 import mongoose from "mongoose";
 // import expressOasGenerator from "express-oas-generator"
-import eventRouter from "./routes/event_routes";
-import categoryRouter from "./routes/category_routes";
+import eventRouter from "./routes/event_routes.js";
+import categoryRouter from "./routes/category_routes.js";
 
 // Create Express app
 const app = express();
@@ -15,6 +15,11 @@ const app = express();
 
 //Connect to database
 await mongoose.connect(process.env.MONGO_URL)
+
+
+// Apply middlewares
+app.use(express.json());
+app.use(express.static('uploads'));
 
 
 
