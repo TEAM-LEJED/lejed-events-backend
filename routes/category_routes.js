@@ -4,6 +4,8 @@ const categoryRouter = Router();
 
 // Routers are here
 
+// categoryRouter.post('/event', postEvent);
+// categoryRouter 
 
 
 // Export routers
