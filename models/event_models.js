@@ -1,4 +1,4 @@
-import mongoose, { Schema } from "mongoose";
+import mongoose, { Schema, model, Types } from "mongoose";
 
 // Create schema
 const eventSchema = new Schema({
@@ -14,3 +14,4 @@ const eventSchema = new Schema({
 });
 
 
+export const EventModel = model('Event', eventSchema)
