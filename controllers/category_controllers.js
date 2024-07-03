@@ -18,27 +18,25 @@ export const postCategory = async (req, res, next) => {
 
 
 // Get category
-export const getCategories = async (req, res, next) => {
+export const getCategories = async (req, res) => {
     try {
-        // Get query params
-        const {   
-            filter = "{}",
-            sort = "{}",
-            fields = "{}",
-            limit = 10, 
-            skip = 0
-        } = req.query;
-        // Get all categories from database
-        const allCategories = await CategoryModel
-            .find(JSON.parse(filter))
-            .sort(JSON.parse(sort))
-            .select(JSON.parse(fields))
-            .limit(JSON.parse(limit))
-            .skip(JSON.parse(skip));
-        // Return response
-        res.status(200).json(allCategories);
+        console.log("request", req.body);
+        const getData = await CategoryModel.find();
+        res.status(200).send(getData)
     } catch (error) {
-        next(error)
+        console.log(error)
     }
 }
 
+
+// Delete category
+export const deleteCategory = async (req, res, next) => {
+    try {
+        // Delete category by id
+        const deletedCategory = await CategoryModel.findByIdAndDelete(req.params.id);
+        // Return response
+        res.json('Selected Category has been successfully deleted');
+    } catch (error) {
+        next(error);
+    }
+}

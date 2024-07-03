@@ -21,10 +21,14 @@ export const postEvent = async (req, res, next) => {
 export const patchEvent = async (req, res, next) => {
     try {
         // Update event by id
-        const updatedEvent = await EventModel.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        console.log('ji', req.params.id, req.body.name)
+
+        const updatedEvent = await EventModel.findByIdAndUpdate(req.params.id, {'name': req.body.name}, { new:true });
         // Return response
-        res.json(updatedEvent);
+        console.log('okkok', updatedEvent)
+        res.status(200).send(updatedEvent);
     } catch (error) {
+        console.log(error)
         next(error)
     }
 }
@@ -47,13 +51,22 @@ export const deleteEvent = async (req, res, next) => {
 export const getEvents = async (req, res, next) => {
     try {
         // Get query params
-        const { limit, skip, filter, fields } = req.query;
-        // Get all events from the database
+        const {   
+            filter = "{}",
+            sort = "{}",
+            fields = "{}",
+            limit = 10, 
+            skip = 0
+        } = req.query;
+        // Get all categories from database
         const allEvents = await EventModel
-        .find(filter ? JSON.parse(filter) : {})
-        .select(fields ? JSON.parse(fields) : '')
-        .limit(limit ? parseInt(limit) : undefined)
-        .skip(skip ? parseInt(skip) : undefined);
+            .find(JSON.parse(filter))
+            .sort(JSON.parse(sort))
+            .select(JSON.parse(fields))
+            .limit(JSON.parse(limit))
+            .skip(JSON.parse(skip));
+        // Return response
+        res.status(200).json(allEvents);
     } catch (error) {
         next(error)
     }
