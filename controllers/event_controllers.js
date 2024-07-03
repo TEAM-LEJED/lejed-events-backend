@@ -73,4 +73,15 @@ export const getEvents = async (req, res, next) => {
 }
 
 
+// Get a particular event
+export const getEventById = async (req, res, next) => {
+    try {
+        // Delete event by id
+        const getEvent = await EventModel.findById(req.params.id);
+        // Return response
+        res.json(getEvent)
+    } catch (error) {
+        next(error)
+    }
+}
 
