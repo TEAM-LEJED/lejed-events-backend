@@ -29,14 +29,14 @@ export const getCategories = async (req, res) => {
 }
 
 
-// Delete category
-export const deleteCategory = async (req, res, next) => {
+// Get a particular category
+export const getCategoryById = async (req, res, next) => {
     try {
-        // Delete category by id
-        const deletedCategory = await CategoryModel.findByIdAndDelete(req.params.id);
+        // Get category by id
+        const getCategory = await CategoryModel.findById(req.params.id);
         // Return response
-        res.json('Selected Category has been successfully deleted');
+        res.json(getCategory)
     } catch (error) {
-        next(error);
+        next(error)
     }
 }

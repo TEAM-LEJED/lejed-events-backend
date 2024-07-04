@@ -10,7 +10,7 @@ export const postEvent = async (req, res, next) => {
         });
         // Return response
         res.json(newEvent);
-        
+
     } catch (error) {
         next(error)
     }
@@ -21,14 +21,13 @@ export const postEvent = async (req, res, next) => {
 export const patchEvent = async (req, res, next) => {
     try {
         // Update event by id
-        console.log('ji', req.params.id, req.body.name)
+        // console.log('ji', req.params.id, req.body.name)
 
-        const updatedEvent = await EventModel.findByIdAndUpdate(req.params.id, {'name': req.body.name}, { new:true });
+        const updatedEvent = await EventModel.findByIdAndUpdate(req.params.id, req.body, { new: true });
         // Return response
-        console.log('okkok', updatedEvent)
-        res.status(200).send(updatedEvent);
+        // console.log('okkok', updatedEvent)
+        res.status(200).json(updatedEvent);
     } catch (error) {
-        console.log(error)
         next(error)
     }
 }
@@ -40,7 +39,7 @@ export const deleteEvent = async (req, res, next) => {
         // Delete event by id
         const deletedEvent = await EventModel.findByIdAndDelete(req.params.id);
         // Return response
-        res.json(deletedEvent)
+        res.json('Selected event has been deleted')
     } catch (error) {
         next(error)
     }
@@ -51,11 +50,11 @@ export const deleteEvent = async (req, res, next) => {
 export const getEvents = async (req, res, next) => {
     try {
         // Get query params
-        const {   
+        const {
             filter = "{}",
             sort = "{}",
             fields = "{}",
-            limit = 10, 
+            limit = 10,
             skip = 0
         } = req.query;
         // Get all categories from database
@@ -72,5 +71,17 @@ export const getEvents = async (req, res, next) => {
     }
 }
 
+
+// Get a particular event
+export const getEventById = async (req, res, next) => {
+    try {
+        // Delete event by id
+        const getEvent = await EventModel.findById(req.params.id);
+        // Return response
+        res.json(getEvent)
+    } catch (error) {
+        next(error)
+    }
+}
 
 

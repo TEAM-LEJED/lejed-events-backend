@@ -9,8 +9,9 @@ import categoryRouter from "./routes/category_routes.js";
 const app = express();
 
 expressOasGenerator.handleResponses(app,{
+    alwaysServeDocs: true,
     tags: ['categories', 'events'],
-    mongooseModels:mongoose.modelNames(),
+    mongooseModels: mongoose.modelNames(),
 });
 
 
@@ -19,15 +20,17 @@ await mongoose.connect(process.env.MONGO_URL)
 
 
 // Apply middlewares
+app.use(cors());
 app.use(express.json());
 app.use(express.static('uploads'));
-app.use(cors())
 
+
+// Use routes
 app.use(eventRouter);
 app.use(categoryRouter);
 
 expressOasGenerator.handleRequests();
-app.use((req, res) => res.redirect('/api-docs'));
+app.use((req, res) => res.redirect('/api-docs/'));
 
 
 // Listen for incoming requests
