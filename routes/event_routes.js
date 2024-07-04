@@ -1,11 +1,13 @@
 import { Router } from "express";
 import { localUpload, remoteUpload } from "../middlewares/upload.js";
-import { getEventById, getEvents, patchEvent, postEvent } from "../controllers/event_controllers.js";
+import { deleteEvent, getEventById, getEvents, patchEvent, postEvent } from "../controllers/event_controllers.js";
 
+
+// Create router
 const eventRouter = Router();
 
-// Routers are here
 
+// Define routes
 eventRouter.post('/events', remoteUpload.single('flier'), postEvent)
 
 eventRouter.get('/events', getEvents)
@@ -13,6 +15,8 @@ eventRouter.get('/events', getEvents)
 eventRouter.get('/events/:id', getEventById)
 
 eventRouter.patch('/events/:id', patchEvent)
+
+eventRouter.delete('/events/:id', deleteEvent)
 
 
 
