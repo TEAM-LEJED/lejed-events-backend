@@ -1,15 +1,18 @@
 import { Router } from "express";
-import { deleteCategory, getCategories, postCategory } from "../controllers/category_controllers.js";
+import { getCategories, getCategoryById, postCategory, } from "../controllers/category_controllers.js";
 import { localUpload, remoteUpload } from "../middlewares/upload.js";
 
+
+// Create router
 const categoryRouter = Router();
 
-// Routers are here
+
+// Define routes
 categoryRouter.post('/categories', remoteUpload.single('image'), postCategory)
 
 categoryRouter.get('/categories', getCategories)
 
-categoryRouter.delete('/categories/:id', deleteCategory)
+categoryRouter.get('/categories/:id', getCategoryById)
 
 // Export routers
 export default categoryRouter;
