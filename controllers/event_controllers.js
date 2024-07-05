@@ -81,6 +81,3 @@ export const getEventById = async (req, res, next) => {
         next(error)
     }
 }
-
-
-
