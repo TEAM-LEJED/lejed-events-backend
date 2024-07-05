@@ -10,7 +10,7 @@ const eventSchema = new Schema({
         enum: ["Conferences", "Award Ceremonies", "Gala Dinners", "Charity Balls", "Banquets", "Weddings", "Birthday Parties", "Festivals", "Fundraising Events", "Themed Parties"],
     },
     date: { type: Date, required: true },
-    time: { type: Date, required: true },
+    time: { type: String, required: true },
     price: { type: Number, required: true },
     location: { type: String, required: true },
     description: { type: String, required: true },
