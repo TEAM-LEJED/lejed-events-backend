@@ -5,8 +5,10 @@ import { toJSON } from "@reis/mongoose-to-json";
 // Create schema
 const eventSchema = new Schema({
     name: { type: String, unique: true, required: true },
-    categoryId: { type: Types.ObjectId, ref: 'Category', required: true },
-    type: { type: String, required: true, enum: ["Formal Events", "Informal Events"] },
+    category: { 
+        type: String,
+        enum: ["Conferences", "Award Ceremonies", "Gala Dinners", "Charity Balls", "Banquets", "Weddings", "Birthday Parties", "Festivals", "Fundraising Events", "Themed Parties"],
+    },
     date: { type: Date, required: true },
     time: { type: Date, required: true },
     price: { type: Number, required: true },

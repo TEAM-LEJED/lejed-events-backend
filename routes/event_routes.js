@@ -18,6 +18,8 @@ eventRouter.patch('/events/:id', patchEvent)
 
 eventRouter.delete('/events/:id', deleteEvent)
 
+// eventRouter.get('/events/:categoryId', getEventByCategory)
+
 
 
 // Export routers
