@@ -20,13 +20,11 @@ export const postEvent = async (req, res, next) => {
 // Update an event
 export const patchEvent = async (req, res, next) => {
     try {
-        // Update event by id
-        // console.log('ji', req.params.id, req.body.name)
-
-        const updatedEvent = await EventModel.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        const eventId = req.params.id
+        const updatedEvent = await EventModel.findByIdAndUpdate({_id: eventId}, req.body, { new: true });
         // Return response
-        // console.log('okkok', updatedEvent)
         res.status(200).json(updatedEvent);
+
     } catch (error) {
         next(error)
     }
