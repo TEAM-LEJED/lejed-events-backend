@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 import cors from "cors";
 import expressOasGenerator from "express-oas-generator";
 import eventRouter from "./routes/event_routes.js";
-import categoryRouter from "./routes/category_routes.js";
+
 
 // Create Express app
 const app = express();
@@ -27,7 +27,7 @@ app.use(express.static('uploads'));
 
 // Use routes
 app.use(eventRouter);
-app.use(categoryRouter);
+
 
 expressOasGenerator.handleRequests();
 app.use((req, res) => res.redirect('/api-docs/'));
